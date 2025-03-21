@@ -1,0 +1,11 @@
+@YouniLab.Member.WebApi_HostAddress = http://localhost:5032
+
+GET {{YouniLab.Member.WebApi_HostAddress}}/todos/
+Accept: application/json
+
+###
+
+GET {{YouniLab.Member.WebApi_HostAddress}}/todos/1
+Accept: application/json
+
+###
