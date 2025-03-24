@@ -1,5 +1,5 @@
 # 使用 .NET SDK 映像構建應用程式
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 RUN apt-get update && apt-get install -y clang zlib1g-dev
 # 設置工作目錄
 WORKDIR /src

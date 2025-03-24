@@ -11,6 +11,8 @@ builder.Services.AddConfig(builder.Configuration);
 builder.Services.AddHttpClient();
 builder.Services.AddRouting();
 builder.Services.AddAppServices();
+builder.Services.AddOpenApi();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -30,12 +32,13 @@ var app = builder.Build();
 
 app.UseCors();
 app.UseRouting();
-
+app.MapOpenApi();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/openapi/v1.json", "OpenAPI V1");
+});
 app.MapGet("/", () => "Hello World!");
 
-app.MapGet("/member/{id}", async (Guid id, MemberAppService memberAppService) =>
-{
-    return true;
-});
+app.MapGet("/member/{id}", async (Guid id, MemberAppService memberAppService) => await memberAppService.GetMemberAsync(id));
 
 app.Run();
